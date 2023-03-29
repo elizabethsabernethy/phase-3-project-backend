@@ -28,14 +28,27 @@ class ApplicationController < Sinatra::Base
     task.to_json
   end
 
-  # post '/baked_goods' do
-  #   baked_good = BakedGood.create(
-  #     name: params[:name],
-  #     price: params[:price],
-  #     bakery_id: params[:bakery_id]
-  #   )
-  #   baked_good.to_json
-  # end
+  delete "/task-lists/:id" do 
+    task_list = TaskList.find(params[:id])
+    task_list.destroy
+    task_list.to_json(include: :tasks)
+  end
+
+  patch "/task-lists/importance/:id" do 
+    task_list = TaskList.find(params[:id])
+    task_list.update(
+      important: params[:important]
+    )
+    task_list.to_json
+  end
+
+  patch "/task-lists/urgency/:id" do 
+    task_list = TaskList.find(params[:id])
+    task_list.update(
+      urgent: params[:urgent]
+    )
+    task_list.to_json
+  end
 
   # patch '/bakeries/:id' do
   #   bakery = Bakery.find(params[:id])
