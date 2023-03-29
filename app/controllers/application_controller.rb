@@ -17,6 +17,17 @@ class ApplicationController < Sinatra::Base
     task_list.to_json
   end
 
+  post "/tasks" do
+    task = Task.create(
+      name: params[:name],
+      important: params[:important],
+      urgent: params[:urgent],
+      complete: params[:complete],
+      task_list_id: params[:task_list_id]
+    )
+    task.to_json
+  end
+
   # post '/baked_goods' do
   #   baked_good = BakedGood.create(
   #     name: params[:name],
