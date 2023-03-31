@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
       urgent: params[:urgent],
       complete: params[:complete]
     )
-    task_list.to_json
+    task_list.to_json(include: :tasks)
   end
 
   post "/tasks" do
@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
     task.to_json
   end
 
-  delete "/task-lists/:id" do 
+  delete "/task-lists/:id" do #When tasklist is deleted, any tasks within said tasklist are not deleted
     task_list = TaskList.find(params[:id])
     task_list.destroy
     task_list.to_json(include: :tasks)
