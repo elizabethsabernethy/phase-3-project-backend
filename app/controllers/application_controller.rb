@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
     task.to_json
   end
 
-  delete "/task-lists/:id" do #When tasklist is deleted, any tasks within said tasklist are not deleted
+  delete "/task-lists/:id" do 
     task_list = TaskList.find(params[:id])
     task_list.destroy
     task_list.to_json(include: :tasks)
