@@ -3,7 +3,7 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/task-lists" do
-    task_lists = TaskList.all.order(important: :desc, urgent: :desc)
+    task_lists = TaskList.all
     task_lists.to_json(include: :tasks)
   end
 
