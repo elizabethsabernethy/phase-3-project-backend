@@ -39,7 +39,7 @@ class ApplicationController < Sinatra::Base
     task_list.update(
       important: params[:important]
     )
-    task_list.to_json
+    task_list.to_json(include: :tasks)
   end
 
   patch "/task-lists/urgency/:id" do 
@@ -47,7 +47,7 @@ class ApplicationController < Sinatra::Base
     task_list.update(
       urgent: params[:urgent]
     )
-    task_list.to_json
+    task_list.to_json(include: :tasks)
   end
 
   patch "/task-lists/name/:id" do 
@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
     task_list.update(
       name: params[:name]
     )
-    task_list.to_json
+    task_list.to_json(include: :tasks)
   end
 
   delete "/tasks/:id" do 
